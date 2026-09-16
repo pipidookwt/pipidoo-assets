@@ -180,7 +180,13 @@
     personalizationName: ""
   }, i = document.getElementById("pipidoo-box-builder");
   if (i) {
-    var l = i.querySelectorAll(".pbb-gender-card"), a = document.getElementById("pbb-to-step-2"), r = document.getElementById("pbb-back-to-1"), n = document.getElementById("pbb-add-to-cart"), c = document.getElementById("pbb-items-grid"), s = document.getElementById("pbb-preview-box"), d = document.getElementById("pbb-counter"), m = document.getElementById("pbb-items-line"), D = document.getElementById("pbb-fee-display"), p = document.getElementById("pbb-total-display"), h = document.getElementById("pbb-msg"), u = i.querySelectorAll(".pbb-step"), g = document.getElementById("pbb-step-indicator-3"), B = document.getElementById("pbb-step-line-3"), y = document.getElementById("pbb-name-input"), f = document.getElementById("pbb-name-char-count"), b = document.getElementById("pbb-personalize-items-note"), v = document.getElementById("pbb-fee-display-3"), x = document.getElementById("pbb-items-line-3"), E = document.getElementById("pbb-personalize-fee-line"), G = document.getElementById("pbb-personalize-fee-line-amount"), I = document.getElementById("pbb-total-display-3"), C = document.getElementById("pbb-msg-3"), A = document.getElementById("pbb-back-to-2"), L = document.getElementById("pbb-final-add-to-cart"), P = T(1.15 / .234);
+    var l = i.querySelectorAll(".pbb-gender-card"), a = document.getElementById("pbb-to-step-2"), n = document.getElementById("pbb-back-to-1"), r = document.getElementById("pbb-add-to-cart"), c = document.getElementById("pbb-items-grid"), s = document.getElementById("pbb-preview-box"), d = document.getElementById("pbb-counter"), m = document.getElementById("pbb-items-line"), p = document.getElementById("pbb-fee-display"), D = document.getElementById("pbb-total-display"), h = document.getElementById("pbb-msg"), u = i.querySelectorAll(".pbb-step"), g = document.createElement("div");
+    g.style.cssText = "position:fixed;top:8px;left:8px;z-index:99999;background:#000;color:#0f0;font-size:11px;padding:6px 10px;border-radius:6px;font-family:monospace;", 
+    document.body.appendChild(g), setInterval(function() {
+      var e = document.getElementById("pbb-to-step-2");
+      g.textContent = "Next disabled=" + (e ? e.disabled : "NOT FOUND") + " | listeners attached=" + (e ? e.getAttribute("data-pbb-bound") || "no" : "-");
+    }, 300);
+    var y = document.getElementById("pbb-step-indicator-3"), B = document.getElementById("pbb-step-line-3"), b = document.getElementById("pbb-name-input"), f = document.getElementById("pbb-name-char-count"), v = document.getElementById("pbb-personalize-items-note"), x = document.getElementById("pbb-fee-display-3"), E = document.getElementById("pbb-items-line-3"), G = document.getElementById("pbb-personalize-fee-line"), I = document.getElementById("pbb-personalize-fee-line-amount"), C = document.getElementById("pbb-total-display-3"), A = document.getElementById("pbb-msg-3"), L = document.getElementById("pbb-back-to-2"), P = document.getElementById("pbb-final-add-to-cart"), S = H(1.15 / .234);
     l.forEach(function(e) {
       e.addEventListener("click", function() {
         try {
@@ -192,10 +198,10 @@
           alert("DEBUG ERROR: " + e.message);
         }
       });
-    }), a.addEventListener("click", function() {
-      H(2), c.innerHTML = "", t.forEach(function(e) {
+    }), a.setAttribute("data-pbb-bound", "yes"), a.addEventListener("click", function() {
+      N(2), c.innerHTML = "", t.forEach(function(e) {
         var t = "boy" === o.gender ? e.imgBoy : e.imgGirl, i = document.createElement("div");
-        i.className = "pbb-item-card", i.setAttribute("data-id", e.id), i.innerHTML = '<img src="' + t + '" alt="' + e.name + '"><span class="pbb-item-name">' + e.name + '</span><span class="pbb-item-price">' + S(M(e)) + "</span>", 
+        i.className = "pbb-item-card", i.setAttribute("data-id", e.id), i.innerHTML = '<img src="' + t + '" alt="' + e.name + '"><span class="pbb-item-name">' + e.name + '</span><span class="pbb-item-price">' + T(M(e)) + "</span>", 
         i.addEventListener("click", function() {
           !function(e) {
             var t = o.selectedItems.findIndex(function(t) {
@@ -205,42 +211,42 @@
               if (o.selectedItems.length >= 5) return;
               o.selectedItems.push(e);
             }
-            N(), F(), k();
+            F(), k(), z();
           }(e);
         }), c.appendChild(i);
-      }), N(), F();
-    }), r.addEventListener("click", function() {
-      H(1);
+      }), F(), k();
     }), n.addEventListener("click", function() {
+      N(1);
+    }), r.addEventListener("click", function() {
       var t;
-      o.selectedItems.length < 4 || (R() ? (H(3), t = o.selectedItems.filter(function(t) {
+      o.selectedItems.length < 4 || (R() ? (N(3), t = o.selectedItems.filter(function(t) {
         return e.indexOf(t.id) > -1;
       }).map(function(e) {
         return e.name;
-      }), b.textContent = "You selected: " + t.join(", ") + ". Add a name to personalize them.", 
-      W()) : w(n, h, ""));
-    }), A.addEventListener("click", function() {
-      H(2);
-    }), y.addEventListener("input", function() {
-      y.value.length > 10 && (y.value = y.value.slice(0, 10)), o.personalizationName = y.value.trim(), 
-      f.textContent = y.value.length, W();
+      }), v.textContent = "You selected: " + t.join(", ") + ". Add a name to personalize them.", 
+      W()) : w(r, h, ""));
     }), L.addEventListener("click", function() {
-      w(L, C, o.personalizationName);
+      N(2);
+    }), b.addEventListener("input", function() {
+      b.value.length > 10 && (b.value = b.value.slice(0, 10)), o.personalizationName = b.value.trim(), 
+      f.textContent = b.value.length, W();
+    }), P.addEventListener("click", function() {
+      w(P, A, o.personalizationName);
     });
   }
-  function S(e) {
+  function T(e) {
     return e.toFixed(3) + " KWD";
   }
   function M(e) {
-    return T(function(e) {
+    return H(function(e) {
       return "boy" === o.gender ? e.costBoy : e.costGirl;
     }(e) / .234);
   }
-  function T(e) {
+  function H(e) {
     var t = e - .9;
     return (t <= 0 ? 0 : Math.ceil(t - 1e-9)) + .9;
   }
-  function H(e) {
+  function N(e) {
     document.getElementById("pbb-step-1").style.display = 1 === e ? "" : "none", document.getElementById("pbb-step-2").style.display = 2 === e ? "" : "none", 
     document.getElementById("pbb-step-3").style.display = 3 === e ? "" : "none", u.forEach(function(t) {
       t.classList.toggle("active", parseInt(t.getAttribute("data-step"), 10) <= e);
@@ -251,7 +257,7 @@
       return e.indexOf(t.id) > -1;
     });
   }
-  function N() {
+  function F() {
     c.querySelectorAll(".pbb-item-card").forEach(function(e) {
       var t = e.getAttribute("data-id"), i = o.selectedItems.some(function(e) {
         return e.id === t;
@@ -259,48 +265,48 @@
       e.classList.toggle("selected", i);
       var l = o.selectedItems.length >= 5;
       e.classList.toggle("disabled", l && !i);
-    }), d.textContent = o.selectedItems.length + " / 5 selected (min 4)", k();
+    }), d.textContent = o.selectedItems.length + " / 5 selected (min 4)", z();
   }
-  function F() {
+  function k() {
     s.innerHTML = "", 0 !== o.selectedItems.length ? o.selectedItems.forEach(function(e) {
       var t = "boy" === o.gender ? e.imgBoy : e.imgGirl, i = document.createElement("div");
       i.className = "pbb-preview-item", i.innerHTML = '<img src="' + t + '" alt="' + e.name + '">', 
       s.appendChild(i);
     }) : s.innerHTML = '<div class="pbb-preview-placeholder">Your box will appear here</div>';
   }
-  function k() {
+  function z() {
     var e = o.selectedItems.reduce(function(e, t) {
       return e + M(t);
-    }, 0), t = e + P;
-    m.innerHTML = "<span>" + o.selectedItems.length + " item" + (1 === o.selectedItems.length ? "" : "s") + " selected</span><span>" + S(e) + "</span>", 
-    D.textContent = S(P), p.textContent = S(t), o.selectedItems.length < 4 ? (h.textContent = "Select at least 4 items to continue (" + o.selectedItems.length + "/4).", 
-    n.disabled = !0) : o.selectedItems.length >= 5 ? (h.textContent = "Remove an item to add another.", 
-    n.disabled = !1) : (h.textContent = "", n.disabled = !1), R() ? (n.textContent = "Next", 
-    g.style.display = "", B.style.display = "") : (n.textContent = "Add to Cart", g.style.display = "none", 
+    }, 0), t = e + S;
+    m.innerHTML = "<span>" + o.selectedItems.length + " item" + (1 === o.selectedItems.length ? "" : "s") + " selected</span><span>" + T(e) + "</span>", 
+    p.textContent = T(S), D.textContent = T(t), o.selectedItems.length < 4 ? (h.textContent = "Select at least 4 items to continue (" + o.selectedItems.length + "/4).", 
+    r.disabled = !0) : o.selectedItems.length >= 5 ? (h.textContent = "Remove an item to add another.", 
+    r.disabled = !1) : (h.textContent = "", r.disabled = !1), R() ? (r.textContent = "Next", 
+    y.style.display = "", B.style.display = "") : (r.textContent = "Add to Cart", y.style.display = "none", 
     B.style.display = "none");
   }
   function W() {
     var e = o.selectedItems.reduce(function(e, t) {
       return e + M(t);
-    }, 0), t = o.personalizationName.length > 0, i = e + P + (t ? 2 : 0);
-    v.textContent = S(P), x.innerHTML = "<span>" + o.selectedItems.length + " item" + (1 === o.selectedItems.length ? "" : "s") + " selected</span><span>" + S(e) + "</span>", 
-    t ? (E.style.display = "", G.textContent = S(2)) : E.style.display = "none", I.textContent = S(i);
+    }, 0), t = o.personalizationName.length > 0, i = e + S + (t ? 2 : 0);
+    x.textContent = T(S), E.innerHTML = "<span>" + o.selectedItems.length + " item" + (1 === o.selectedItems.length ? "" : "s") + " selected</span><span>" + T(e) + "</span>", 
+    t ? (G.style.display = "", I.textContent = T(2)) : G.style.display = "none", C.textContent = T(i);
   }
   function w(e, t, i) {
     var l = o.selectedItems.reduce(function(e, t) {
       return e + M(t);
-    }, 0), a = i && i.length > 0, r = l + P + (a ? 2 : 0), n = o.selectedItems.map(function(e) {
+    }, 0), a = i && i.length > 0, n = l + S + (a ? 2 : 0), r = o.selectedItems.map(function(e) {
       return e.name;
     }).join(", "), c = "boy" === o.gender ? "Boy" : "Girl", s = e.textContent;
     e.disabled = !0, e.textContent = "Adding...";
     var d = {
       Gender: c,
-      "Selected Items": n
+      "Selected Items": r
     };
     a && (d["Personalization Name"] = i), Ecwid.Cart.addProduct({
       id: 849737063,
       quantity: 1,
-      selectedPrice: r,
+      selectedPrice: n,
       options: d,
       callback: function(o) {
         e.textContent = s, e.disabled = !1, o ? (t.style.color = "#4caf50", t.textContent = "Added to cart!") : (t.style.color = "#d9534f", 
